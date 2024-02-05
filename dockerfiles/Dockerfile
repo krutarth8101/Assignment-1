@@ -10,20 +10,15 @@ RUN set -xe \
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+# Copy only necessary files to /app
+COPY app.py .
+COPY dockerfiles/requirements.txt .
 
 # Display the content of the current directory for debugging
 RUN ls -l
 
 # Upgrade pip and install dependencies from requirements.txt
-RUN pip install --upgrade pip
-# Display the content of requirements.txt for debugging
-RUN cat dockerfiles/requirements.txt
-
-# Upgrade pip and install dependencies from requirements.txt
-RUN pip install --upgrade pip && pip install -r dockerfiles/requirements.txt
-
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Expose port 8080
 EXPOSE 8080
