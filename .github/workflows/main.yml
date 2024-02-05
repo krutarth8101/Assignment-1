@@ -32,21 +32,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_REGION: us-east-1
-
+      
       - name: Build Docker image for App
         run: |
-          ls -l dockerfiles/
-          docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP:webapp -f dockerfiles/Dockerfile .
-
-      - name: Push Docker image to ECR for App
-        run: |
+          cd dockerfiles/
+          docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP:webapp -f Dockerfile .
           docker push $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP:webapp
-
       - name: Build Docker image for SQL
         run: |
-          ls -l dockerfiles/
-          docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL:mysql -f dockerfiles/Dockerfile_mysql .
-
-      - name: Push Docker image to ECR for SQL
-        run: |
+          cd dockerfiles/
+          docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL:mysql -f Dockerfile_mysql .
           docker push $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL:mysql
