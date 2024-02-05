@@ -24,15 +24,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Amazon ECR for App
-        id: login-ecr-app
+      - name: Login to Amazon ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry: ${{ env.ECR_REGISTRY_APP }}
-          region: ${{ env.AWS_REGION }}
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_REGION: us-east-1
 
       - name: Build Docker image for App
         run: |
@@ -42,16 +41,6 @@ jobs:
       - name: Push Docker image to ECR for App
         run: |
           docker push $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP/$IMAGE_NAME_APP:$GITHUB_SHA
-
-      - name: Login to Amazon ECR for SQL
-        id: login-ecr-sql
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry: ${{ env.ECR_REGISTRY_SQL }}
-          region: ${{ env.AWS_REGION }}
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          session-token: ${{ secrets.AWS_SESSION_TOKEN }}
 
       - name: Build Docker image for SQL
         run: |
