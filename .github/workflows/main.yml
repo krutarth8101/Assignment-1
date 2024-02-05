@@ -32,8 +32,8 @@ jobs:
 
       - name: Build Docker image for App
         run: |
-         cd dockerfiles/
-          docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP/$IMAGE_NAME_APP:$GITHUB_SHA .
+         ls -l  
+         docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP/$IMAGE_NAME_APP:$GITHUB_SHA dockerfiles/
 
       - name: Authenticate Docker to ECR for App
         run: |
@@ -45,9 +45,8 @@ jobs:
 
       - name: Build Docker image for SQL
         run: |
-         cd dockerfiles/
-          docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL/$IMAGE_NAME_SQL:$GITHUB_SHA .
-
+           ls -l dockerfiles/  
+                 docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL/$IMAGE_NAME_SQL:$GITHUB_SHA dockerfiles/
       - name: Authenticate Docker to ECR for SQL
         run: |
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY_SQL
