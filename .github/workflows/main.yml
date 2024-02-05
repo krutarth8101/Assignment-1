@@ -13,11 +13,11 @@ jobs:
       AWS_REGION: us-east-1
       ECR_REGISTRY_APP: 345852704676.dkr.ecr.us-east-1.amazonaws.com/webapp
       ECR_REPO_NAME_APP: webapp
-      IMAGE_NAME_APP: webappimage
+      
       
       ECR_REGISTRY_SQL: 345852704676.dkr.ecr.us-east-1.amazonaws.com/mysql
       ECR_REPO_NAME_SQL: mysql
-      IMAGE_NAME_SQL: sqlimage
+      
 
     steps:
       
@@ -36,11 +36,11 @@ jobs:
       - name: Build Docker image for App
         run: |
           ls -l dockerfiles/
-          docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP/$IMAGE_NAME_APP:$GITHUB_SHA -f dockerfiles/Dockerfile .
+          docker build -t $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP:$GITHUB_SHA -f dockerfiles/Dockerfile .
 
       - name: Push Docker image to ECR for App
         run: |
-          docker push $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP/$IMAGE_NAME_APP:$GITHUB_SHA
+          docker push $ECR_REGISTRY_APP/$ECR_REPO_NAME_APP:$GITHUB_SHA
 
       - name: Build Docker image for SQL
         run: |
