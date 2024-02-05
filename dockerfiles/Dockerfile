@@ -9,22 +9,20 @@ RUN set -xe \
 
 # Set the working directory to /app
 WORKDIR /app
-
-# Copy only necessary files to /app
-COPY dockerfiles/app.py .
-COPY dockerfiles/requirements.txt .
+COPY . /app
 
 # Display the content of the current directory for debugging
-RUN ls -l
+
 
 # Upgrade pip and install dependencies from requirements.txt
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip 
+RUN pip install -r requirements.txt
 
 # Expose port 8080
 EXPOSE 8080
 
 # Define environment variable
-ENV NAME World
+
 
 # Run app.py when the container launches
 ENTRYPOINT [ "python3" ]
