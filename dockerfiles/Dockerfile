@@ -11,7 +11,7 @@ RUN set -xe \
 WORKDIR /app
 
 # Copy only necessary files to /app
-COPY app.py .
+COPY dockerfiles/app.py .
 COPY dockerfiles/requirements.txt .
 
 # Display the content of the current directory for debugging
