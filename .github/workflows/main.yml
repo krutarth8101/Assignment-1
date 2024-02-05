@@ -45,8 +45,8 @@ jobs:
       - name: Build Docker image for SQL
         run: |
           ls -l dockerfiles/
-          docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL/$IMAGE_NAME_SQL:$GITHUB_SHA -f dockerfiles/Dockerfile_MYSQL .
+          docker build -t $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL:$GITHUB_SHA -f dockerfiles/Dockerfile_MYSQL .
 
       - name: Push Docker image to ECR for SQL
         run: |
-          docker push $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL/$IMAGE_NAME_SQL:$GITHUB_SHA
+          docker push $ECR_REGISTRY_SQL/$ECR_REPO_NAME_SQL:$GITHUB_SHA
