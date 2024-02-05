@@ -18,7 +18,12 @@ RUN ls -l
 
 # Upgrade pip and install dependencies from requirements.txt
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+# Display the content of requirements.txt for debugging
+RUN cat dockerfiles/requirements.txt
+
+# Upgrade pip and install dependencies from requirements.txt
+RUN pip install --upgrade pip && pip install -r dockerfiles/requirements.txt
+
 
 # Expose port 8080
 EXPOSE 8080
