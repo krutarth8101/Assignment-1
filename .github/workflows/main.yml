@@ -11,11 +11,11 @@ jobs:
 
     env:
       AWS_REGION: us-east-1
-      ECR_REGISTRY_APP: 345852704676.dkr.ecr.us-east-1.amazonaws.com/webapp
+      ECR_REGISTRY_APP: 345852704676.dkr.ecr.us-east-1.amazonaws.com
       ECR_REPO_NAME_APP: webapp
       
       
-      ECR_REGISTRY_SQL: 345852704676.dkr.ecr.us-east-1.amazonaws.com/mysql
+      ECR_REGISTRY_SQL: 345852704676.dkr.ecr.us-east-1.amazonaws.com
       ECR_REPO_NAME_SQL: mysql
       
 
